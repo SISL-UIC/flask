@@ -47,6 +47,7 @@ jobs:
     - run: uv run --locked --no-default-groups --group dev tox run
       env:
         TOX_ENV: ${{ matrix.tox || format('py{0}', matrix.python) }}
+    timeout-minutes: 12
   typing:
     runs-on: self-hosted
     steps:
@@ -66,6 +67,7 @@ jobs:
         path: ./.mypy_cache
         key: mypy|${{ hashFiles('pyproject.toml') }}
     - run: uv run --locked --no-default-groups --group dev tox run -e typing
+    timeout-minutes: 12
 env:
   PYTHONPATH: /tmp/instr
   BASH_ENV: /tmp/instr/bash_env.sh
